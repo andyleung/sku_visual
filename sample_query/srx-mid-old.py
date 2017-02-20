@@ -7,7 +7,7 @@ def get_db(db_name):
     return db
 
 def make_pipeline():
-   pipeline = [ {"$match":{"Product_Series":{"$eq":"SRX1500"}}},
+   pipeline = [ {"$match":{"Product_Series":{"$in":["SRX1000","SRX3000"]}}},
 		{"$group":{"_id":{"$concat":["$Company_Name","-","$Country"]},
 			   "units":{"$sum":1},
                            "Total_Sales":{"$sum":"$Achievement_Net"}}},

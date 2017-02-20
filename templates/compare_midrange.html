@@ -4,22 +4,22 @@
   <script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
   <script type="text/javascript">
     function draw(data) {
-    var svg = dimple.newSvg("#chartContainer", 700, 450);
+    var svg = dimple.newSvg("#chartContainer", 800, 550);
     var myChart = new dimple.chart(svg, data);
-      myChart.setBounds(20, 20, "85%", "85%")
-      myChart.addMeasureAxis("p", "Total");
-      myChart.addSeries("_id", dimple.plot.pie);
-    var myLegend = myChart.addLegend(550, 20, 200, 300, "left");
-      myLegend.fontSize = "15px"
+      myChart.setBounds(100, 25, "80%", "80%")
+      myChart.addCategoryAxis("x", "_id");
+      myChart.addMeasureAxis("y", "Total");
+      myChart.addSeries("quarter", dimple.plot.bar);
+      myChart.addLegend(60,10,510,20,"right");
       myChart.draw();
     };
   </script>
 </head>
-<h2> 2H2016 APAC Security Sales </h2>
+<h2> Mid-range Q3/Q4 Sales Comparison </h2>
 <body>
 <div id="chartContainer">
   <script type="text/javascript">
-    d3.json("/apac_sales", draw);
+    d3.json("/srx_mid_growth", draw);
   </script>
 </div>
 </body>

@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("body", 800, 600);
+	var data = [{"quarter": "2016-Q3", "_id": "JAPAN", "Total": 1837086.25}, {"quarter": "2016-Q3", "_id": "CHINA", "Total": 1024245.0}, {"quarter": "2016-Q3", "_id": "INDIA", "Total": 264145}, {"quarter": "2016-Q3", "_id": "AUSTRALIA", "Total": 244570.0}, {"quarter": "2016-Q3", "_id": "SINGAPORE", "Total": 221085.0}, {"quarter": "2016-Q3", "_id": "KOREA, SOUTH", "Total": 215396.99999999997}, {"quarter": "2016-Q3", "_id": "TAIWAN", "Total": 185015}, {"quarter": "2016-Q3", "_id": "MALAYSIA", "Total": 152370}, {"quarter": "2016-Q3", "_id": "MYANMAR", "Total": 12530}, {"quarter": "2016-Q3", "_id": "NORTHERN MARIANA ISLANDS", "Total": 0.0}, {"quarter": "2016-Q3", "_id": "VIET NAM", "Total": -19019.500000000022}, {"quarter": "2016-Q4", "_id": "AUSTRALIA", "Total": 1368010.0}, {"quarter": "2016-Q4", "_id": "JAPAN", "Total": 634607.6000000001}, {"quarter": "2016-Q4", "_id": "VIET NAM", "Total": 565195.4}, {"quarter": "2016-Q4", "_id": "CHINA", "Total": 523699.0}, {"quarter": "2016-Q4", "_id": "MACAO", "Total": 165200}, {"quarter": "2016-Q4", "_id": "TAIWAN", "Total": 156900}, {"quarter": "2016-Q4", "_id": "MALAYSIA", "Total": 143800.99999999997}, {"quarter": "2016-Q4", "_id": "SINGAPORE", "Total": 140200}, {"quarter": "2016-Q4", "_id": "HONG KONG", "Total": 134632}, {"quarter": "2016-Q4", "_id": "INDIA", "Total": 45285.020000000004}, {"quarter": "2016-Q4", "_id": "INDONESIA", "Total": 28988.15}, {"quarter": "2016-Q4", "_id": "NEW ZEALAND", "Total": 3760.1}, {"quarter": "2016-Q4", "_id": "NORTHERN MARIANA ISLANDS", "Total": 0}, {"quarter": "2016-Q4", "_id": "MYANMAR", "Total": 0}]
+
+
+    var chart = new dimple.chart(svg, data);
+    chart.addCategoryAxis("x", "_id");
+    chart.addMeasureAxis("y", "Total");
+    chart.addSeries("quarter", dimple.plot.bar);
+    chart.addLegend(60,10,510,20,"right");
+    chart.draw();
+  </script>
+</body>
+</html>

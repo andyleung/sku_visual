@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template
+from flask import render_template,url_for
 from pymongo import MongoClient
 import json
 from bson import json_util
@@ -13,10 +13,21 @@ DBS_NAME = 'srxsales'
 COLLECTION_NAME = 'projects'
 FIELDS = {'Product': True, 'Country': True, 'Partner_Name': True, 'Achievement_Date': True, 'Achievement_Net': True, '_id': False}
 
+@app.route("/test1")
+def test1():
+    return render_template("test1.html")
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 @app.route("/apac_sales")
 def apac_sales():
@@ -41,21 +52,27 @@ def srx5K_diff():
     q3_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q3"},
                                "Product_Series":{"$eq":"SRX5000"}}},
                     {"$group":{"_id":"$Country",
-                               "quarter":{"$addToSet":"$Achievement_Quarter"},
+                               ## "quarter":{"$addToSet":"$Achievement_Quarter"},
                                "Total":{"$sum":"$Achievement_Net"}}},
                     {"$sort":{"Total":-1}}]
     q4_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q4"},
                                "Product_Series":{"$eq":"SRX5000"}}},
                     {"$group":{"_id":"$Country",
-                               "quarter":{"$addToSet":"$Achievement_Quarter"},
+                               ## "quarter":{"$addToSet":"$Achievement_Quarter"},
                                "Total":{"$sum":"$Achievement_Net"}}},
                     {"$sort":{"Total":-1}}]
     client = MongoClient('localhost:27017')
     db = client[DBS_NAME]
+    ## Find Result List #1
     cursor1 = db.projects.aggregate(q3_pipeline)
     output1 = cursor1["result"]
-    cursor2 = db.projects.aggregate(q4_pipeline)
+    for i in output1:
+      i["quarter"] = "Q3-2016"
+    ## Find Result List #2
+    cursor2 = db.projects.aggregate(q4_pipeline)    
     output2 = cursor2["result"]
+    for j in output2:
+      j["quarter"] = "Q4-2016"
     output = output1 + output2
     return json.dumps(output)
 
@@ -69,21 +86,25 @@ def newbranchq3():
     q3_300_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q3"},
                                "Product_Series":{"$eq":"SRX300"}}},
                     {"$group":{"_id":"$Country",
-                               "products":{"$addToSet":"$Product_Series"},
+                       ##        "products":{"$addToSet":"$Product_Series"},
                                "Total":{"$sum":"$Achievement_Net"}}},
                     {"$sort":{"Total":-1}}]
     q3_100200_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q3"},
                                "Product_Series":{"$in":["SRX100","SRX200"]}}},
                     {"$group":{"_id":"$Country",
-                               "products":{"$addToSet":"$Product_Series"},
+                         ##      "products":{"$addToSet":"$Product_Series"},
                                "Total":{"$sum":"$Achievement_Net"}}},
                     {"$sort":{"Total":-1}}]
     client = MongoClient('localhost:27017')
     db = client[DBS_NAME]
     cursor1 = db.projects.aggregate(q3_300_pipeline)
     output1 = cursor1["result"]
+    for i in output1:
+      i["products"] = "SRX300"
     cursor2 = db.projects.aggregate(q3_100200_pipeline)
     output2 = cursor2["result"]
+    for j in output2:
+      j["products"] = "SRX100-SRX200"
     output = output1 + output2
     return json.dumps(output)
 
@@ -97,21 +118,25 @@ def newbranchq4():
     q4_300_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q4"},
                                "Product_Series":{"$eq":"SRX300"}}},
                     {"$group":{"_id":"$Country",
-                               "products":{"$addToSet":"$Product_Series"},
+                       ##        "products":{"$addToSet":"$Product_Series"},
                                "Total":{"$sum":"$Achievement_Net"}}},
                     {"$sort":{"Total":-1}}]
     q4_100200_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q4"},
                                "Product_Series":{"$in":["SRX100","SRX200"]}}},
                     {"$group":{"_id":"$Country",
-                               "products":{"$addToSet":"$Product_Series"},
+                       ##        "products":{"$addToSet":"$Product_Series"},
                                "Total":{"$sum":"$Achievement_Net"}}},
                     {"$sort":{"Total":-1}}]
     client = MongoClient('localhost:27017')
     db = client[DBS_NAME]
     cursor1 = db.projects.aggregate(q4_300_pipeline)
     output1 = cursor1["result"]
+    for i in output1:
+        i["products"] = "SRX300"
     cursor2 = db.projects.aggregate(q4_100200_pipeline)
     output2 = cursor2["result"]
+    for j in output2:
+        j["products"] = "SRX100-SRX200"
     output = output1 + output2
     return json.dumps(output)
 
@@ -119,6 +144,70 @@ def newbranchq4():
 @app.route('/compareQ4branch')
 def compareQ4branch():
     return render_template('compareQ4branch.html')
+
+@app.route('/srx1500growth')
+def srx1500growth():
+    q3_1500_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q3"},
+                               "Product_Series":{"$eq":"SRX1500"}}},
+                    {"$group":{"_id":"$Country",
+                    ###           "quarter":{"$addToSet":"$Achievement_Quarter"},
+                               "Total":{"$sum":"$Achievement_Net"}}},
+                    {"$sort":{"Total":-1}}]
+    q4_1500_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q4"},
+                               "Product_Series":{"$eq":"SRX1500"}}},
+                    {"$group":{"_id":"$Country",
+                    ###           "quarter":{"$addToSet":"$Achievement_Quarter"},
+                               "Total":{"$sum":"$Achievement_Net"}}},
+                    {"$sort":{"Total":-1}}]
+    client = MongoClient('localhost:27017')
+    db = client[DBS_NAME]
+    cursor1 = db.projects.aggregate(q3_1500_pipeline)
+    output1 = cursor1["result"]
+    for i in output1:
+      i["quarter"] = "Q3-2016"
+    cursor2 = db.projects.aggregate(q4_1500_pipeline)
+    output2 = cursor2["result"]
+    for i in output2:
+      i["quarter"] = "Q4-2016"
+    output = output1 + output2
+    return json.dumps(output)
+
+## compareSRX1500 reads data from srx 1500 growth
+@app.route('/compare1500')
+def compare1500():
+    return render_template('compare1500.html')
+
+@app.route('/srx_mid_growth')
+def srx_mid_growth():
+    q3_midrange_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q3"},
+                               "Product_Series":{"$in":["SRX1000","SRX3000"]}}},
+                    {"$group":{"_id":"$Country",
+                        ##       "quarter":{"$addToSet":"$Achievement_Quarter"},
+                               "Total":{"$sum":"$Achievement_Net"}}},
+                    {"$sort":{"Total":-1}}]
+    q4_midrange_pipeline = [ {"$match":{"Achievement_Quarter":{"$eq":"2016-Q4"},
+                               "Product_Series":{"$in":["SRX1000","SRX3000"]}}},
+                    {"$group":{"_id":"$Country",
+                        ##     "quarter":{"$addToSet":"$Achievement_Quarter"},
+                               "Total":{"$sum":"$Achievement_Net"}}},
+                    {"$sort":{"Total":-1}}]
+    client = MongoClient('localhost:27017')
+    db = client[DBS_NAME]
+    cursor1 = db.projects.aggregate(q3_midrange_pipeline)
+    output1 = cursor1["result"]
+    for i in output1:
+      i["quarter"] = "Q3-2016"
+    cursor2 = db.projects.aggregate(q4_midrange_pipeline)
+    output2 = cursor2["result"]
+    for j in output2:
+      j["quarter"] = "Q4-2016"
+    output = output1 + output2
+    return json.dumps(output)
+
+## compare midrange reads data from srx_mid_growth
+@app.route('/compare_midrange')
+def compare_midrange():
+    return render_template('compare_midrange.html')
 
 @app.route("/srxsales/2016")
 def donorschoose_projects():

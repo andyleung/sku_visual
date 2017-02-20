@@ -1,19 +1,70 @@
-<!DOCTYPE html>
-<head>
-  <script src="http://d3js.org/d3.v4.min.js"></script>
-  <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
-</head>
-<body>
-  <script type="text/javascript">
-    var svg = dimple.newSvg("body", 800, 600);
-    var data = [
-      { "Word":"Hello", "Awesomeness":2000 },
-      { "Word":"World", "Awesomeness":3000 }
-    ];
-    var chart = new dimple.chart(svg, data);
-    chart.addCategoryAxis("x", "Word");
-    chart.addMeasureAxis("y", "Awesomeness");
-    chart.addSeries(null, dimple.plot.bar);
-    chart.draw();
-  </script>
-</body>
+<!doctype html>
+<html>
+   <head>
+   <title>SRX SKU Analysis</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	</head>
+	<body>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="http://localhost:5000/">Home</a></li>
+            <li role="presentation"><a href="http://localhost:5000/about">About</a></li>
+            <li role="presentation"><a href="http://localhost:5000/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Security SKU Analysis</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>SRX SKU Analysis</h1>
+        <p class="lead">Test template to explore SRX SKU sales relationship with respects to different models, and regions in Q3 and Q4 2016.</p>
+        <p><a class="btn btn-lg btn-success" href="https://www.github.com/andyleung/sku_visual" role="button">View source code</a></p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4><a href="http://localhost:5000/pie">APAC Security Sales</a></h4>
+          <p>Pie chart for security sales per region.</p>
+
+          <h4><a href="http://localhost:5000/compareQ3branch">Q3 branch comparison</a></h4>
+          <p>Comparison of new SRX300 models sales against older branch models (SRX 100, SRX200) in Q3 2016</p>
+
+          <h4><a href="http://localhost:5000/compareQ4branch">Q4 branch comparison</a></h4>
+          <p>Comparison of new SRX300 models sales against older branch models (SRX 100, SRX200) in Q4 2016</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4><a href="http://localhost:5000/compare5K">SRX 5K sales</a></h4>
+          <p>Comparison of new SRX5K sales in Q3 and Q4</p>
+
+          <h4><a href="http://localhost:5000/compare1500">SRX1500 sales</a></h4>
+          <p>Examine the growth of SRX1500 in 2nd hakf 2016</p>
+
+          <h4><a href="http://localhost:5000/compare_midrange">SRX midrange sales</a></h4>
+          <p>Examine the growth of SRX midrange platforms including SRX3K and SRX1K</p>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2017 Juniper Networks.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script type = "text/javascript" 
+         src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</body>
+</html>
