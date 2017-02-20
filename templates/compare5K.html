@@ -1,0 +1,26 @@
+<html>
+<head>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
+  <script type="text/javascript">
+    function draw(data) {
+    var svg = dimple.newSvg("#chartContainer", 800, 550);
+    var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(100, 25, "80%", "80%")
+      myChart.addCategoryAxis("x", "_id");
+      myChart.addMeasureAxis("y", "Total");
+      myChart.addSeries("quarter", dimple.plot.bar);
+      myChart.draw();
+    };
+  </script>
+</head>
+<h2> SRX5K Q3/Q4 Sales Comparison </h2>
+<body>
+<div id="chartContainer">
+  <script type="text/javascript">
+    d3.json("/srx5K_diff", draw);
+  </script>
+</div>
+</body>
+</html>
+

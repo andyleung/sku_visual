@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
+</head>
+<h2>New Branch Product Sales</h2>
+<body>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("body", 800, 600);
+    var data = [{"_id": "JAPAN","Quarter":"Q4","Total": 597026.0199999986}, 
+		{"_id": "AUSTRALIA","Quarter":"Q4", "Total": 396984.85000000003}, 
+		{"_id": "THAILAND","Quarter":"Q4", "Total": 384645.3699999999}, 
+ 		{"_id": "KOREA, SOUTH","Quarter":"Q4", "Total": 199759.2899999994}, 
+		{"_id": "CHINA","Quarter":"Q4", "Total": 190487.39999999822}, 
+    		{"_id": "JAPAN","Quarter":"Q3", "Total": 500000}, 
+		{"_id": "AUSTRALIA","Quarter":"Q3", "Total": 3069848}, 
+		{"_id": "THAILAND","Quarter":"Q3", "Total": 284645}, 
+ 		{"_id": "KOREA, SOUTH","Quarter":"Q3", "Total": 199759},
+		{"_id": "CHINA","Quarter":"Q3", "Total": 100000}
+		]; 
+    var chart = new dimple.chart(svg, data);
+    chart.addCategoryAxis("x", "_id");
+    chart.addMeasureAxis("y", "Total");
+    chart.addSeries("Quarter", dimple.plot.bar);
+    chart.addLegend(60,10,510,20,"right");
+    chart.draw();
+  </script>
+</body>
+</html>

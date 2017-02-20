@@ -1,0 +1,27 @@
+<html>
+<head>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
+  <script type="text/javascript">
+    function draw(data) {
+    var svg = dimple.newSvg("#chartContainer", 700, 450);
+    var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(20, 20, "85%", "85%")
+      myChart.addMeasureAxis("p", "Total");
+      myChart.addSeries("_id", dimple.plot.pie);
+    var myLegend = myChart.addLegend(550, 20, 200, 300, "left");
+      myLegend.fontSize = "15px"
+      myChart.draw();
+    };
+  </script>
+</head>
+<h2> 2016 APAC Security Sales </h2>
+<body>
+<div id="chartContainer">
+  <script type="text/javascript">
+    d3.json("/apac_sales", draw);
+  </script>
+</div>
+</body>
+</html>
+

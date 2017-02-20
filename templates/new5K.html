@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("body", 800, 600);
+    var data = [{'Total': 1837086.25, '_id': 'JAPAN', 'quarter': ['2016-Q3']},
+                {'Total': 1024245.0, '_id': 'CHINA', 'quarter': ['2016-Q3']},
+                {'Total': 1024245.0, '_id': 'JAPAN', 'quarter': ['2016-Q4']},
+                {'Total': 1024245.0, '_id': 'CHINA', 'quarter': ['2016-Q4']}];
+    var chart = new dimple.chart(svg, data);
+    chart.addCategoryAxis("x", "_id");
+    chart.addMeasureAxis("y", "Total");
+    chart.addSeries("quarter", dimple.plot.bar);
+    chart.addLegend(60,10,510,20,"right");
+    chart.draw();
+  </script>
+</body>
+</html>
