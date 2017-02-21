@@ -36,11 +36,16 @@ def apac_sales():
                 {"$sort":{"Total":-1}}]
                 ## {"$limit":10}]
     client = MongoClient('localhost:27017')
+    ## print "Connection OK!!"
     db = client[DBS_NAME]
+    ## print "Collections.works !!"
     cursor = db.projects.aggregate(pipeline)
+    ## print "Done with cursor"
+    import pprint
+    ## print "This is the cursor/result:"
+    ## pprint.pprint(cursor)
     output = json.dumps(cursor["result"])
-    return output
-##    return render_template("pie.html")
+    return (output)
 
 ## apac_pie looks for data from /apac_sales
 @app.route('/pie')

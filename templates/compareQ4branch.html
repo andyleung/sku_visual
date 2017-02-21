@@ -1,4 +1,6 @@
-<html>
+{% extends "base.html" %}
+{% block content %}
+
 <head>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
@@ -15,13 +17,14 @@
     };
   </script>
 </head>
+
 <h2> SRX Brach Q4 Sales Comparison (300 vs 100/200)</h2>
-<body>
+
 <div id="chartContainer">
   <script type="text/javascript">
     d3.json("/newbranchq4", draw);
   </script>
 </div>
-</body>
-</html>
+
+{% endblock %}
 
